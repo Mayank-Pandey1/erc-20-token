@@ -21,9 +21,8 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     log(`Token contract is deployed at: ${ourToken.address}`);
 
     if (
-        !developmentChains.includes(
-            network.name && process.env.ETHERSCAN_API_KEY
-        )
+        !developmentChains.includes(network.name) &&
+        process.env.ETHERSCAN_API_KEY
     ) {
         await verify(ourToken.address, [INITIAL_SUPPLY]);
     }
